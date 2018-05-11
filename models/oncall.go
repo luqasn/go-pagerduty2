@@ -28,11 +28,11 @@ type Oncall struct {
 
 	// The escalation policy for the on-call.
 	// Read Only: true
-	EscalationPolicy *EscalationPolicyReference `json:"escalation_policy,omitempty"`
+	EscalationPolicy *EscalationPolicy `json:"escalation_policy,omitempty"`
 
 	// The schedule for the on-call.
 	// Read Only: true
-	Schedule *ScheduleReference `json:"schedule,omitempty"`
+	Schedule *Schedule `json:"schedule,omitempty"`
 
 	// The start of the on-call. If `null`, the on-call is a permanent user on-call.
 	// Read Only: true
@@ -41,7 +41,7 @@ type Oncall struct {
 
 	// The user for the on-call.
 	// Read Only: true
-	User *UserReference `json:"user,omitempty"`
+	User *User `json:"user,omitempty"`
 }
 
 // Validate validates this oncall

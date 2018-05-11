@@ -1,0 +1,23 @@
+diff --git a/swagger.yaml b/swagger.yaml
+index d734a0c..fcb0c79 100644
+--- a/swagger.yaml
++++ b/swagger.yaml
+@@ -8607,15 +8607,15 @@ definitions:
+     type: object
+     properties:
+       escalation_policy:
+-        $ref: '#/definitions/EscalationPolicyReference'
++        $ref: '#/definitions/EscalationPolicy'
+         readOnly: true
+         description: The escalation policy for the on-call.
+       user:
+-        $ref: '#/definitions/UserReference'
++        $ref: '#/definitions/User'
+         readOnly: true
+         description: The user for the on-call.
+       schedule:
+-        $ref: '#/definitions/ScheduleReference'
++        $ref: '#/definitions/Schedule'
+         readOnly: true
+         description: The schedule for the on-call.
+       escalation_level:

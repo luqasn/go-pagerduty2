@@ -7,3 +7,6 @@ generate: clean
 		-w $(shell pwd) \
 		quay.io/goswagger/swagger \
 		generate client -f ./swagger.yaml --skip-validation
+
+patch:
+	git apply -v on_call_details.patch
