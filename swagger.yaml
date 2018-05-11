@@ -8607,15 +8607,15 @@ definitions:
     type: object
     properties:
       escalation_policy:
-        $ref: '#/definitions/EscalationPolicy'
+        $ref: '#/definitions/EscalationPolicyReference'
         readOnly: true
         description: The escalation policy for the on-call.
       user:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/UserReference'
         readOnly: true
         description: The user for the on-call.
       schedule:
-        $ref: '#/definitions/Schedule'
+        $ref: '#/definitions/ScheduleReference'
         readOnly: true
         description: The schedule for the on-call.
       escalation_level:
