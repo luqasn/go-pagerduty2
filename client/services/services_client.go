@@ -25,180 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteServicesID deletes a service
-
-Delete an existing service. Once the service is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this service.
-*/
-func (a *Client) DeleteServicesID(params *DeleteServicesIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteServicesIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteServicesIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteServicesID",
-		Method:             "DELETE",
-		PathPattern:        "/services/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteServicesIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteServicesIDNoContent), nil
-
-}
-
-/*
-GetServices lists services
-
-List existing services.
-*/
-func (a *Client) GetServices(params *GetServicesParams, authInfo runtime.ClientAuthInfoWriter) (*GetServicesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetServicesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetServices",
-		Method:             "GET",
-		PathPattern:        "/services",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetServicesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetServicesOK), nil
-
-}
-
-/*
-GetServicesID gets a service
-
-Get details about an existing service.
-*/
-func (a *Client) GetServicesID(params *GetServicesIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetServicesIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetServicesIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetServicesID",
-		Method:             "GET",
-		PathPattern:        "/services/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetServicesIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetServicesIDOK), nil
-
-}
-
-/*
-GetServicesIDIntegrationsIntegrationID views an integration
-
-Get details about an integration belonging to a service.
-*/
-func (a *Client) GetServicesIDIntegrationsIntegrationID(params *GetServicesIDIntegrationsIntegrationIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetServicesIDIntegrationsIntegrationIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetServicesIDIntegrationsIntegrationIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetServicesIDIntegrationsIntegrationID",
-		Method:             "GET",
-		PathPattern:        "/services/{id}/integrations/{integration_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetServicesIDIntegrationsIntegrationIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetServicesIDIntegrationsIntegrationIDOK), nil
-
-}
-
-/*
-PostServices creates a service
-
-Create a new service.
-*/
-func (a *Client) PostServices(params *PostServicesParams, authInfo runtime.ClientAuthInfoWriter) (*PostServicesCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostServicesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostServices",
-		Method:             "POST",
-		PathPattern:        "/services",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostServicesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostServicesCreated), nil
-
-}
-
-/*
-PostServicesIDIntegrations creates a new integration
+CreateIntegration creates a new integration
 
 Create a new integration belonging to a service.
 */
-func (a *Client) PostServicesIDIntegrations(params *PostServicesIDIntegrationsParams, authInfo runtime.ClientAuthInfoWriter) (*PostServicesIDIntegrationsCreated, error) {
+func (a *Client) CreateIntegration(params *CreateIntegrationParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIntegrationCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostServicesIDIntegrationsParams()
+		params = NewCreateIntegrationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostServicesIDIntegrations",
+		ID:                 "createIntegration",
 		Method:             "POST",
 		PathPattern:        "/services/{id}/integrations",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostServicesIDIntegrationsReader{formats: a.formats},
+		Reader:             &CreateIntegrationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,30 +51,61 @@ func (a *Client) PostServicesIDIntegrations(params *PostServicesIDIntegrationsPa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostServicesIDIntegrationsCreated), nil
+	return result.(*CreateIntegrationCreated), nil
 
 }
 
 /*
-PutServicesID updates a service
+CreateService creates a service
 
-Update an existing service.
+Create a new service.
 */
-func (a *Client) PutServicesID(params *PutServicesIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutServicesIDOK, error) {
+func (a *Client) CreateService(params *CreateServiceParams, authInfo runtime.ClientAuthInfoWriter) (*CreateServiceCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutServicesIDParams()
+		params = NewCreateServiceParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutServicesID",
-		Method:             "PUT",
+		ID:                 "createService",
+		Method:             "POST",
+		PathPattern:        "/services",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreateServiceCreated), nil
+
+}
+
+/*
+DeleteService deletes a service
+
+Delete an existing service. Once the service is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this service.
+*/
+func (a *Client) DeleteService(params *DeleteServiceParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteServiceNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteServiceParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteService",
+		Method:             "DELETE",
 		PathPattern:        "/services/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutServicesIDReader{formats: a.formats},
+		Reader:             &DeleteServiceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -237,30 +113,123 @@ func (a *Client) PutServicesID(params *PutServicesIDParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutServicesIDOK), nil
+	return result.(*DeleteServiceNoContent), nil
 
 }
 
 /*
-PutServicesIDIntegrationsIntegrationID updates an existing integration
+GetIntegration views an integration
 
-Update an integration belonging to a service.
+Get details about an integration belonging to a service.
 */
-func (a *Client) PutServicesIDIntegrationsIntegrationID(params *PutServicesIDIntegrationsIntegrationIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutServicesIDIntegrationsIntegrationIDOK, error) {
+func (a *Client) GetIntegration(params *GetIntegrationParams, authInfo runtime.ClientAuthInfoWriter) (*GetIntegrationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutServicesIDIntegrationsIntegrationIDParams()
+		params = NewGetIntegrationParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutServicesIDIntegrationsIntegrationID",
+		ID:                 "getIntegration",
+		Method:             "GET",
+		PathPattern:        "/services/{id}/integrations/{integration_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetIntegrationOK), nil
+
+}
+
+/*
+GetService gets a service
+
+Get details about an existing service.
+*/
+func (a *Client) GetService(params *GetServiceParams, authInfo runtime.ClientAuthInfoWriter) (*GetServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetServiceParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getService",
+		Method:             "GET",
+		PathPattern:        "/services/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetServiceOK), nil
+
+}
+
+/*
+ListServices lists services
+
+List existing services.
+*/
+func (a *Client) ListServices(params *ListServicesParams, authInfo runtime.ClientAuthInfoWriter) (*ListServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListServicesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listServices",
+		Method:             "GET",
+		PathPattern:        "/services",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListServicesOK), nil
+
+}
+
+/*
+UpdateIntegration updates an existing integration
+
+Update an integration belonging to a service.
+*/
+func (a *Client) UpdateIntegration(params *UpdateIntegrationParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIntegrationParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateIntegration",
 		Method:             "PUT",
 		PathPattern:        "/services/{id}/integrations/{integration_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutServicesIDIntegrationsIntegrationIDReader{formats: a.formats},
+		Reader:             &UpdateIntegrationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -268,7 +237,38 @@ func (a *Client) PutServicesIDIntegrationsIntegrationID(params *PutServicesIDInt
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutServicesIDIntegrationsIntegrationIDOK), nil
+	return result.(*UpdateIntegrationOK), nil
+
+}
+
+/*
+UpdateService updates a service
+
+Update an existing service.
+*/
+func (a *Client) UpdateService(params *UpdateServiceParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateServiceParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateService",
+		Method:             "PUT",
+		PathPattern:        "/services/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UpdateServiceOK), nil
 
 }
 

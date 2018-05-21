@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-GetNotifications lists notifications
+ListNotifications lists notifications
 
 List notifications for a given time range, optionally filtered by type (sms_notification, email_notification, phone_notification, or push_notification).
 */
-func (a *Client) GetNotifications(params *GetNotificationsParams, authInfo runtime.ClientAuthInfoWriter) (*GetNotificationsOK, error) {
+func (a *Client) ListNotifications(params *ListNotificationsParams, authInfo runtime.ClientAuthInfoWriter) (*ListNotificationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetNotificationsParams()
+		params = NewListNotificationsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetNotifications",
+		ID:                 "listNotifications",
 		Method:             "GET",
 		PathPattern:        "/notifications",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetNotificationsReader{formats: a.formats},
+		Reader:             &ListNotificationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,7 +51,7 @@ func (a *Client) GetNotifications(params *GetNotificationsParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetNotificationsOK), nil
+	return result.(*ListNotificationsOK), nil
 
 }
 

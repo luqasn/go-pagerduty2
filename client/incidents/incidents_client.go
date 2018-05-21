@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-GetIncidents lists incidents
+CreateIncident creates an incident
 
-List existing incidents.
+Create an incident synchronously without a corresponding event from a monitoring service.
 */
-func (a *Client) GetIncidents(params *GetIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsOK, error) {
+func (a *Client) CreateIncident(params *CreateIncidentParams, authInfo runtime.ClientAuthInfoWriter) (*CreateIncidentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIncidentsParams()
+		params = NewCreateIncidentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidents",
-		Method:             "GET",
+		ID:                 "createIncident",
+		Method:             "POST",
 		PathPattern:        "/incidents",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetIncidentsReader{formats: a.formats},
+		Reader:             &CreateIncidentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,30 +51,30 @@ func (a *Client) GetIncidents(params *GetIncidentsParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIncidentsOK), nil
+	return result.(*CreateIncidentCreated), nil
 
 }
 
 /*
-GetIncidentsID gets an incident
+CreateNote creates a note on an incident
 
-Show detailed information about an incident. Accepts either an incident id, or an incident number.
+Create a new note for the specified incident.
 */
-func (a *Client) GetIncidentsID(params *GetIncidentsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsIDOK, error) {
+func (a *Client) CreateNote(params *CreateNoteParams, authInfo runtime.ClientAuthInfoWriter) (*CreateNoteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIncidentsIDParams()
+		params = NewCreateNoteParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidentsID",
-		Method:             "GET",
-		PathPattern:        "/incidents/{id}",
+		ID:                 "createNote",
+		Method:             "POST",
+		PathPattern:        "/incidents/{id}/notes",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetIncidentsIDReader{formats: a.formats},
+		Reader:             &CreateNoteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,61 +82,30 @@ func (a *Client) GetIncidentsID(params *GetIncidentsIDParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIncidentsIDOK), nil
+	return result.(*CreateNoteOK), nil
 
 }
 
 /*
-GetIncidentsIDAlerts lists alerts for an incident
-
-List alerts for the specified incident.
-*/
-func (a *Client) GetIncidentsIDAlerts(params *GetIncidentsIDAlertsParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsIDAlertsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetIncidentsIDAlertsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidentsIDAlerts",
-		Method:             "GET",
-		PathPattern:        "/incidents/{id}/alerts",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetIncidentsIDAlertsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetIncidentsIDAlertsOK), nil
-
-}
-
-/*
-GetIncidentsIDAlertsAlertID gets an alert
+GetAlert gets an alert
 
 Show detailed information about an alert. Accepts an alert id.
 */
-func (a *Client) GetIncidentsIDAlertsAlertID(params *GetIncidentsIDAlertsAlertIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsIDAlertsAlertIDOK, error) {
+func (a *Client) GetAlert(params *GetAlertParams, authInfo runtime.ClientAuthInfoWriter) (*GetAlertOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIncidentsIDAlertsAlertIDParams()
+		params = NewGetAlertParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidentsIDAlertsAlertID",
+		ID:                 "getAlert",
 		Method:             "GET",
 		PathPattern:        "/incidents/{id}/alerts/{alert_id}/",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetIncidentsIDAlertsAlertIDReader{formats: a.formats},
+		Reader:             &GetAlertReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,30 +113,123 @@ func (a *Client) GetIncidentsIDAlertsAlertID(params *GetIncidentsIDAlertsAlertID
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIncidentsIDAlertsAlertIDOK), nil
+	return result.(*GetAlertOK), nil
 
 }
 
 /*
-GetIncidentsIDLogEntries lists log entries for an incident
+GetIncident gets an incident
 
-List log entries for the specified incident.
+Show detailed information about an incident. Accepts either an incident id, or an incident number.
 */
-func (a *Client) GetIncidentsIDLogEntries(params *GetIncidentsIDLogEntriesParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsIDLogEntriesOK, error) {
+func (a *Client) GetIncident(params *GetIncidentParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIncidentsIDLogEntriesParams()
+		params = NewGetIncidentParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidentsIDLogEntries",
+		ID:                 "getIncident",
+		Method:             "GET",
+		PathPattern:        "/incidents/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetIncidentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetIncidentOK), nil
+
+}
+
+/*
+ListAlerts lists alerts for an incident
+
+List alerts for the specified incident.
+*/
+func (a *Client) ListAlerts(params *ListAlertsParams, authInfo runtime.ClientAuthInfoWriter) (*ListAlertsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListAlertsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listAlerts",
+		Method:             "GET",
+		PathPattern:        "/incidents/{id}/alerts",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListAlertsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAlertsOK), nil
+
+}
+
+/*
+ListIncidents lists incidents
+
+List existing incidents.
+*/
+func (a *Client) ListIncidents(params *ListIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIncidentsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListIncidentsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listIncidents",
+		Method:             "GET",
+		PathPattern:        "/incidents",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListIncidentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListIncidentsOK), nil
+
+}
+
+/*
+ListLogEntries lists log entries for an incident
+
+List log entries for the specified incident.
+*/
+func (a *Client) ListLogEntries(params *ListLogEntriesParams, authInfo runtime.ClientAuthInfoWriter) (*ListLogEntriesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListLogEntriesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listLogEntries",
 		Method:             "GET",
 		PathPattern:        "/incidents/{id}/log_entries",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetIncidentsIDLogEntriesReader{formats: a.formats},
+		Reader:             &ListLogEntriesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -175,30 +237,30 @@ func (a *Client) GetIncidentsIDLogEntries(params *GetIncidentsIDLogEntriesParams
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIncidentsIDLogEntriesOK), nil
+	return result.(*ListLogEntriesOK), nil
 
 }
 
 /*
-GetIncidentsIDNotes lists notes for an incident
+ListNotes lists notes for an incident
 
 List existing notes for the specified incident.
 */
-func (a *Client) GetIncidentsIDNotes(params *GetIncidentsIDNotesParams, authInfo runtime.ClientAuthInfoWriter) (*GetIncidentsIDNotesOK, error) {
+func (a *Client) ListNotes(params *ListNotesParams, authInfo runtime.ClientAuthInfoWriter) (*ListNotesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetIncidentsIDNotesParams()
+		params = NewListNotesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetIncidentsIDNotes",
+		ID:                 "listNotes",
 		Method:             "GET",
 		PathPattern:        "/incidents/{id}/notes",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetIncidentsIDNotesReader{formats: a.formats},
+		Reader:             &ListNotesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,185 +268,30 @@ func (a *Client) GetIncidentsIDNotes(params *GetIncidentsIDNotesParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIncidentsIDNotesOK), nil
+	return result.(*ListNotesOK), nil
 
 }
 
 /*
-PostIncidents creates an incident
-
-Create an incident synchronously without a corresponding event from a monitoring service.
-*/
-func (a *Client) PostIncidents(params *PostIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*PostIncidentsCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostIncidentsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostIncidents",
-		Method:             "POST",
-		PathPattern:        "/incidents",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostIncidentsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostIncidentsCreated), nil
-
-}
-
-/*
-PostIncidentsIDNotes creates a note on an incident
-
-Create a new note for the specified incident.
-*/
-func (a *Client) PostIncidentsIDNotes(params *PostIncidentsIDNotesParams, authInfo runtime.ClientAuthInfoWriter) (*PostIncidentsIDNotesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostIncidentsIDNotesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostIncidentsIDNotes",
-		Method:             "POST",
-		PathPattern:        "/incidents/{id}/notes",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostIncidentsIDNotesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostIncidentsIDNotesOK), nil
-
-}
-
-/*
-PostIncidentsIDSnooze snoozes an incident
-
-Snooze an incident.
-*/
-func (a *Client) PostIncidentsIDSnooze(params *PostIncidentsIDSnoozeParams, authInfo runtime.ClientAuthInfoWriter) (*PostIncidentsIDSnoozeCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostIncidentsIDSnoozeParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostIncidentsIDSnooze",
-		Method:             "POST",
-		PathPattern:        "/incidents/{id}/snooze",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostIncidentsIDSnoozeReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostIncidentsIDSnoozeCreated), nil
-
-}
-
-/*
-PutIncidents manages incidents
-
-Acknowledge, resolve, escalate or reassign one or more incidents.
-*/
-func (a *Client) PutIncidents(params *PutIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*PutIncidentsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPutIncidentsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutIncidents",
-		Method:             "PUT",
-		PathPattern:        "/incidents",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PutIncidentsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PutIncidentsOK), nil
-
-}
-
-/*
-PutIncidentsID updates an incident
-
-Acknowledge, resolve, escalate or reassign an incident.
-*/
-func (a *Client) PutIncidentsID(params *PutIncidentsIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutIncidentsIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPutIncidentsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutIncidentsID",
-		Method:             "PUT",
-		PathPattern:        "/incidents/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PutIncidentsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PutIncidentsIDOK), nil
-
-}
-
-/*
-PutIncidentsIDAlerts manages alerts
+ManageAlerts manages alerts
 
 Resolve multiple alerts or associate them with different incidents.
 */
-func (a *Client) PutIncidentsIDAlerts(params *PutIncidentsIDAlertsParams, authInfo runtime.ClientAuthInfoWriter) (*PutIncidentsIDAlertsOK, error) {
+func (a *Client) ManageAlerts(params *ManageAlertsParams, authInfo runtime.ClientAuthInfoWriter) (*ManageAlertsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutIncidentsIDAlertsParams()
+		params = NewManageAlertsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutIncidentsIDAlerts",
+		ID:                 "manageAlerts",
 		Method:             "PUT",
 		PathPattern:        "/incidents/{id}/alerts",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutIncidentsIDAlertsReader{formats: a.formats},
+		Reader:             &ManageAlertsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -392,30 +299,30 @@ func (a *Client) PutIncidentsIDAlerts(params *PutIncidentsIDAlertsParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutIncidentsIDAlertsOK), nil
+	return result.(*ManageAlertsOK), nil
 
 }
 
 /*
-PutIncidentsIDAlertsAlertID updates an alert
+ManageIncidents manages incidents
 
-Resolve an alert or associate an alert with a new parent incident.
+Acknowledge, resolve, escalate or reassign one or more incidents.
 */
-func (a *Client) PutIncidentsIDAlertsAlertID(params *PutIncidentsIDAlertsAlertIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutIncidentsIDAlertsAlertIDOK, error) {
+func (a *Client) ManageIncidents(params *ManageIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*ManageIncidentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutIncidentsIDAlertsAlertIDParams()
+		params = NewManageIncidentsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutIncidentsIDAlertsAlertID",
+		ID:                 "manageIncidents",
 		Method:             "PUT",
-		PathPattern:        "/incidents/{id}/alerts/{alert_id}/",
+		PathPattern:        "/incidents",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutIncidentsIDAlertsAlertIDReader{formats: a.formats},
+		Reader:             &ManageIncidentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -423,30 +330,30 @@ func (a *Client) PutIncidentsIDAlertsAlertID(params *PutIncidentsIDAlertsAlertID
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutIncidentsIDAlertsAlertIDOK), nil
+	return result.(*ManageIncidentsOK), nil
 
 }
 
 /*
-PutIncidentsIDMerge merges incidents
+MergeIncidents merges incidents
 
 Merge a list of source incidents into this incident.
 */
-func (a *Client) PutIncidentsIDMerge(params *PutIncidentsIDMergeParams, authInfo runtime.ClientAuthInfoWriter) (*PutIncidentsIDMergeOK, error) {
+func (a *Client) MergeIncidents(params *MergeIncidentsParams, authInfo runtime.ClientAuthInfoWriter) (*MergeIncidentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutIncidentsIDMergeParams()
+		params = NewMergeIncidentsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutIncidentsIDMerge",
+		ID:                 "mergeIncidents",
 		Method:             "PUT",
 		PathPattern:        "/incidents/{id}/merge",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutIncidentsIDMergeReader{formats: a.formats},
+		Reader:             &MergeIncidentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -454,7 +361,100 @@ func (a *Client) PutIncidentsIDMerge(params *PutIncidentsIDMergeParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutIncidentsIDMergeOK), nil
+	return result.(*MergeIncidentsOK), nil
+
+}
+
+/*
+SnoozeIncident snoozes an incident
+
+Snooze an incident.
+*/
+func (a *Client) SnoozeIncident(params *SnoozeIncidentParams, authInfo runtime.ClientAuthInfoWriter) (*SnoozeIncidentCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSnoozeIncidentParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "snoozeIncident",
+		Method:             "POST",
+		PathPattern:        "/incidents/{id}/snooze",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SnoozeIncidentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*SnoozeIncidentCreated), nil
+
+}
+
+/*
+UpdateAlert updates an alert
+
+Resolve an alert or associate an alert with a new parent incident.
+*/
+func (a *Client) UpdateAlert(params *UpdateAlertParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateAlertOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAlertParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateAlert",
+		Method:             "PUT",
+		PathPattern:        "/incidents/{id}/alerts/{alert_id}/",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateAlertReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UpdateAlertOK), nil
+
+}
+
+/*
+UpdateIncident updates an incident
+
+Acknowledge, resolve, escalate or reassign an incident.
+*/
+func (a *Client) UpdateIncident(params *UpdateIncidentParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIncidentOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIncidentParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateIncident",
+		Method:             "PUT",
+		PathPattern:        "/incidents/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateIncidentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UpdateIncidentOK), nil
 
 }
 

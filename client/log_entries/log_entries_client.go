@@ -25,56 +25,25 @@ type Client struct {
 }
 
 /*
-GetLogEntries lists log entries
-
-List all of the incident log entries across the entire account.
-*/
-func (a *Client) GetLogEntries(params *GetLogEntriesParams, authInfo runtime.ClientAuthInfoWriter) (*GetLogEntriesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetLogEntriesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetLogEntries",
-		Method:             "GET",
-		PathPattern:        "/log_entries",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetLogEntriesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetLogEntriesOK), nil
-
-}
-
-/*
-GetLogEntriesID gets a log entry
+GetLogEntry gets a log entry
 
 Get details for a specific incident log entry. This method provides additional information you can use to get at raw event data.
 */
-func (a *Client) GetLogEntriesID(params *GetLogEntriesIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetLogEntriesIDOK, error) {
+func (a *Client) GetLogEntry(params *GetLogEntryParams, authInfo runtime.ClientAuthInfoWriter) (*GetLogEntryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetLogEntriesIDParams()
+		params = NewGetLogEntryParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetLogEntriesID",
+		ID:                 "getLogEntry",
 		Method:             "GET",
 		PathPattern:        "/log_entries/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetLogEntriesIDReader{formats: a.formats},
+		Reader:             &GetLogEntryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,7 +51,38 @@ func (a *Client) GetLogEntriesID(params *GetLogEntriesIDParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetLogEntriesIDOK), nil
+	return result.(*GetLogEntryOK), nil
+
+}
+
+/*
+ListAllLogEntries lists log entries
+
+List all of the incident log entries across the entire account.
+*/
+func (a *Client) ListAllLogEntries(params *ListAllLogEntriesParams, authInfo runtime.ClientAuthInfoWriter) (*ListAllLogEntriesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListAllLogEntriesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listAllLogEntries",
+		Method:             "GET",
+		PathPattern:        "/log_entries",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListAllLogEntriesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAllLogEntriesOK), nil
 
 }
 

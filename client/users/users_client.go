@@ -25,335 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteUsersID deletes a user
-
-Remove an existing user.
-*/
-func (a *Client) DeleteUsersID(params *DeleteUsersIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteUsersIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteUsersIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteUsersID",
-		Method:             "DELETE",
-		PathPattern:        "/users/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteUsersIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteUsersIDNoContent), nil
-
-}
-
-/*
-DeleteUsersIDContactMethodsContactMethodID deletes a user s contact method
-
-Remove a user's contact method.
-*/
-func (a *Client) DeleteUsersIDContactMethodsContactMethodID(params *DeleteUsersIDContactMethodsContactMethodIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteUsersIDContactMethodsContactMethodIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteUsersIDContactMethodsContactMethodIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteUsersIDContactMethodsContactMethodID",
-		Method:             "DELETE",
-		PathPattern:        "/users/{id}/contact_methods/{contact_method_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteUsersIDContactMethodsContactMethodIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteUsersIDContactMethodsContactMethodIDNoContent), nil
-
-}
-
-/*
-DeleteUsersIDNotificationRulesNotificationRuleID deletes a user s notification rule
-
-Remove a user's notification rule.
-*/
-func (a *Client) DeleteUsersIDNotificationRulesNotificationRuleID(params *DeleteUsersIDNotificationRulesNotificationRuleIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteUsersIDNotificationRulesNotificationRuleIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteUsersIDNotificationRulesNotificationRuleIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteUsersIDNotificationRulesNotificationRuleID",
-		Method:             "DELETE",
-		PathPattern:        "/users/{id}/notification_rules/{notification_rule_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteUsersIDNotificationRulesNotificationRuleIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteUsersIDNotificationRulesNotificationRuleIDNoContent), nil
-
-}
-
-/*
-GetUsers lists users
-
-List users of your PagerDuty account, optionally filtered by a search query.
-*/
-func (a *Client) GetUsers(params *GetUsersParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsers",
-		Method:             "GET",
-		PathPattern:        "/users",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersOK), nil
-
-}
-
-/*
-GetUsersID gets a user
-
-Get details about an existing user.
-*/
-func (a *Client) GetUsersID(params *GetUsersIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersID",
-		Method:             "GET",
-		PathPattern:        "/users/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersIDOK), nil
-
-}
-
-/*
-GetUsersIDContactMethods lists a user s contact methods
-
-List contact methods of your PagerDuty user.
-*/
-func (a *Client) GetUsersIDContactMethods(params *GetUsersIDContactMethodsParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersIDContactMethodsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersIDContactMethodsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersIDContactMethods",
-		Method:             "GET",
-		PathPattern:        "/users/{id}/contact_methods",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersIDContactMethodsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersIDContactMethodsOK), nil
-
-}
-
-/*
-GetUsersIDContactMethodsContactMethodID gets a user s contact method
-
-Get details about a user's contact method.
-*/
-func (a *Client) GetUsersIDContactMethodsContactMethodID(params *GetUsersIDContactMethodsContactMethodIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersIDContactMethodsContactMethodIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersIDContactMethodsContactMethodIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersIDContactMethodsContactMethodID",
-		Method:             "GET",
-		PathPattern:        "/users/{id}/contact_methods/{contact_method_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersIDContactMethodsContactMethodIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersIDContactMethodsContactMethodIDOK), nil
-
-}
-
-/*
-GetUsersIDNotificationRules lists a user s notification rules
-
-List notification rules of your PagerDuty user.
-*/
-func (a *Client) GetUsersIDNotificationRules(params *GetUsersIDNotificationRulesParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersIDNotificationRulesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersIDNotificationRulesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersIDNotificationRules",
-		Method:             "GET",
-		PathPattern:        "/users/{id}/notification_rules",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersIDNotificationRulesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersIDNotificationRulesOK), nil
-
-}
-
-/*
-GetUsersIDNotificationRulesNotificationRuleID gets a user s notification rule
-
-Get details about a user's notification rule.
-*/
-func (a *Client) GetUsersIDNotificationRulesNotificationRuleID(params *GetUsersIDNotificationRulesNotificationRuleIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersIDNotificationRulesNotificationRuleIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUsersIDNotificationRulesNotificationRuleIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersIDNotificationRulesNotificationRuleID",
-		Method:             "GET",
-		PathPattern:        "/users/{id}/notification_rules/{notification_rule_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetUsersIDNotificationRulesNotificationRuleIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersIDNotificationRulesNotificationRuleIDOK), nil
-
-}
-
-/*
-PostUsers creates a user
-
-Create a new user. Note that you must also supply a `password` property to create a user--it will not be returned by any API.
-*/
-func (a *Client) PostUsers(params *PostUsersParams, authInfo runtime.ClientAuthInfoWriter) (*PostUsersCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostUsersParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostUsers",
-		Method:             "POST",
-		PathPattern:        "/users",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostUsersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostUsersCreated), nil
-
-}
-
-/*
-PostUsersIDContactMethods creates a user contact method
+CreateContactMethod creates a user contact method
 
 Create a new contact method.
 */
-func (a *Client) PostUsersIDContactMethods(params *PostUsersIDContactMethodsParams, authInfo runtime.ClientAuthInfoWriter) (*PostUsersIDContactMethodsCreated, error) {
+func (a *Client) CreateContactMethod(params *CreateContactMethodParams, authInfo runtime.ClientAuthInfoWriter) (*CreateContactMethodCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostUsersIDContactMethodsParams()
+		params = NewCreateContactMethodParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostUsersIDContactMethods",
+		ID:                 "createContactMethod",
 		Method:             "POST",
 		PathPattern:        "/users/{id}/contact_methods",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostUsersIDContactMethodsReader{formats: a.formats},
+		Reader:             &CreateContactMethodReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -361,30 +51,30 @@ func (a *Client) PostUsersIDContactMethods(params *PostUsersIDContactMethodsPara
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostUsersIDContactMethodsCreated), nil
+	return result.(*CreateContactMethodCreated), nil
 
 }
 
 /*
-PostUsersIDNotificationRules creates a user notification rule
+CreateNotificationRule creates a user notification rule
 
 Create a new notification rule.
 */
-func (a *Client) PostUsersIDNotificationRules(params *PostUsersIDNotificationRulesParams, authInfo runtime.ClientAuthInfoWriter) (*PostUsersIDNotificationRulesCreated, error) {
+func (a *Client) CreateNotificationRule(params *CreateNotificationRuleParams, authInfo runtime.ClientAuthInfoWriter) (*CreateNotificationRuleCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostUsersIDNotificationRulesParams()
+		params = NewCreateNotificationRuleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostUsersIDNotificationRules",
+		ID:                 "createNotificationRule",
 		Method:             "POST",
 		PathPattern:        "/users/{id}/notification_rules",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostUsersIDNotificationRulesReader{formats: a.formats},
+		Reader:             &CreateNotificationRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -392,30 +82,123 @@ func (a *Client) PostUsersIDNotificationRules(params *PostUsersIDNotificationRul
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostUsersIDNotificationRulesCreated), nil
+	return result.(*CreateNotificationRuleCreated), nil
 
 }
 
 /*
-PutUsersID updates a user
+CreateUser creates a user
 
-Update an existing user. Note that you may also supply a `password` property--it will not be returned by any API.
+Create a new user. Note that you must also supply a `password` property to create a user--it will not be returned by any API.
 */
-func (a *Client) PutUsersID(params *PutUsersIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutUsersIDOK, error) {
+func (a *Client) CreateUser(params *CreateUserParams, authInfo runtime.ClientAuthInfoWriter) (*CreateUserCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutUsersIDParams()
+		params = NewCreateUserParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutUsersID",
-		Method:             "PUT",
+		ID:                 "createUser",
+		Method:             "POST",
+		PathPattern:        "/users",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreateUserCreated), nil
+
+}
+
+/*
+DeleteContactMethod deletes a user s contact method
+
+Remove a user's contact method.
+*/
+func (a *Client) DeleteContactMethod(params *DeleteContactMethodParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteContactMethodNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteContactMethodParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteContactMethod",
+		Method:             "DELETE",
+		PathPattern:        "/users/{id}/contact_methods/{contact_method_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteContactMethodReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteContactMethodNoContent), nil
+
+}
+
+/*
+DeleteNotificationRule deletes a user s notification rule
+
+Remove a user's notification rule.
+*/
+func (a *Client) DeleteNotificationRule(params *DeleteNotificationRuleParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteNotificationRuleNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteNotificationRuleParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteNotificationRule",
+		Method:             "DELETE",
+		PathPattern:        "/users/{id}/notification_rules/{notification_rule_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteNotificationRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteNotificationRuleNoContent), nil
+
+}
+
+/*
+DeleteUser deletes a user
+
+Remove an existing user.
+*/
+func (a *Client) DeleteUser(params *DeleteUserParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteUserNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteUserParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteUser",
+		Method:             "DELETE",
 		PathPattern:        "/users/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutUsersIDReader{formats: a.formats},
+		Reader:             &DeleteUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -423,30 +206,216 @@ func (a *Client) PutUsersID(params *PutUsersIDParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutUsersIDOK), nil
+	return result.(*DeleteUserNoContent), nil
 
 }
 
 /*
-PutUsersIDContactMethodsContactMethodID updates a user s contact method
+GetContactMethod gets a user s contact method
 
-Update a user's contact method.
+Get details about a user's contact method.
 */
-func (a *Client) PutUsersIDContactMethodsContactMethodID(params *PutUsersIDContactMethodsContactMethodIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutUsersIDContactMethodsContactMethodIDOK, error) {
+func (a *Client) GetContactMethod(params *GetContactMethodParams, authInfo runtime.ClientAuthInfoWriter) (*GetContactMethodOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutUsersIDContactMethodsContactMethodIDParams()
+		params = NewGetContactMethodParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutUsersIDContactMethodsContactMethodID",
+		ID:                 "getContactMethod",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/contact_methods/{contact_method_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetContactMethodReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetContactMethodOK), nil
+
+}
+
+/*
+GetNotificationRule gets a user s notification rule
+
+Get details about a user's notification rule.
+*/
+func (a *Client) GetNotificationRule(params *GetNotificationRuleParams, authInfo runtime.ClientAuthInfoWriter) (*GetNotificationRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetNotificationRuleParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getNotificationRule",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/notification_rules/{notification_rule_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetNotificationRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetNotificationRuleOK), nil
+
+}
+
+/*
+GetUser gets a user
+
+Get details about an existing user.
+*/
+func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter) (*GetUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUserParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getUser",
+		Method:             "GET",
+		PathPattern:        "/users/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetUserOK), nil
+
+}
+
+/*
+ListContactMethods lists a user s contact methods
+
+List contact methods of your PagerDuty user.
+*/
+func (a *Client) ListContactMethods(params *ListContactMethodsParams, authInfo runtime.ClientAuthInfoWriter) (*ListContactMethodsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListContactMethodsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listContactMethods",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/contact_methods",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListContactMethodsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListContactMethodsOK), nil
+
+}
+
+/*
+ListNotificationRules lists a user s notification rules
+
+List notification rules of your PagerDuty user.
+*/
+func (a *Client) ListNotificationRules(params *ListNotificationRulesParams, authInfo runtime.ClientAuthInfoWriter) (*ListNotificationRulesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListNotificationRulesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listNotificationRules",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/notification_rules",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListNotificationRulesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListNotificationRulesOK), nil
+
+}
+
+/*
+ListUsers lists users
+
+List users of your PagerDuty account, optionally filtered by a search query.
+*/
+func (a *Client) ListUsers(params *ListUsersParams, authInfo runtime.ClientAuthInfoWriter) (*ListUsersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListUsersParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listUsers",
+		Method:             "GET",
+		PathPattern:        "/users",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListUsersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListUsersOK), nil
+
+}
+
+/*
+UpdateContactMethod updates a user s contact method
+
+Update a user's contact method.
+*/
+func (a *Client) UpdateContactMethod(params *UpdateContactMethodParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateContactMethodOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateContactMethodParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateContactMethod",
 		Method:             "PUT",
 		PathPattern:        "/users/{id}/contact_methods/{contact_method_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutUsersIDContactMethodsContactMethodIDReader{formats: a.formats},
+		Reader:             &UpdateContactMethodReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -454,30 +423,30 @@ func (a *Client) PutUsersIDContactMethodsContactMethodID(params *PutUsersIDConta
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutUsersIDContactMethodsContactMethodIDOK), nil
+	return result.(*UpdateContactMethodOK), nil
 
 }
 
 /*
-PutUsersIDNotificationRulesNotificationRuleID updates a user s notification rule
+UpdateNotificationRule updates a user s notification rule
 
 Update a user's notification rule.
 */
-func (a *Client) PutUsersIDNotificationRulesNotificationRuleID(params *PutUsersIDNotificationRulesNotificationRuleIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutUsersIDNotificationRulesNotificationRuleIDOK, error) {
+func (a *Client) UpdateNotificationRule(params *UpdateNotificationRuleParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateNotificationRuleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutUsersIDNotificationRulesNotificationRuleIDParams()
+		params = NewUpdateNotificationRuleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutUsersIDNotificationRulesNotificationRuleID",
+		ID:                 "updateNotificationRule",
 		Method:             "PUT",
 		PathPattern:        "/users/{id}/notification_rules/{notification_rule_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutUsersIDNotificationRulesNotificationRuleIDReader{formats: a.formats},
+		Reader:             &UpdateNotificationRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -485,7 +454,38 @@ func (a *Client) PutUsersIDNotificationRulesNotificationRuleID(params *PutUsersI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutUsersIDNotificationRulesNotificationRuleIDOK), nil
+	return result.(*UpdateNotificationRuleOK), nil
+
+}
+
+/*
+UpdateUser updates a user
+
+Update an existing user. Note that you may also supply a `password` property--it will not be returned by any API.
+*/
+func (a *Client) UpdateUser(params *UpdateUserParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateUserParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateUser",
+		Method:             "PUT",
+		PathPattern:        "/users/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UpdateUserOK), nil
 
 }
 

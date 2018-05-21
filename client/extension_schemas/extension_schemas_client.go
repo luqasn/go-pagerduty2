@@ -25,56 +25,25 @@ type Client struct {
 }
 
 /*
-GetExtensionSchemas lists extension schemas
-
-List all extension schemas.
-*/
-func (a *Client) GetExtensionSchemas(params *GetExtensionSchemasParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionSchemasOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExtensionSchemasParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetExtensionSchemas",
-		Method:             "GET",
-		PathPattern:        "/extension_schemas",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExtensionSchemasReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetExtensionSchemasOK), nil
-
-}
-
-/*
-GetExtensionSchemasID gets an extension vendor
+GetExtensionSchema gets an extension vendor
 
 Get details about one specific extension vendor.
 */
-func (a *Client) GetExtensionSchemasID(params *GetExtensionSchemasIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionSchemasIDOK, error) {
+func (a *Client) GetExtensionSchema(params *GetExtensionSchemaParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionSchemaOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetExtensionSchemasIDParams()
+		params = NewGetExtensionSchemaParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetExtensionSchemasID",
+		ID:                 "getExtensionSchema",
 		Method:             "GET",
 		PathPattern:        "/extension_schemas/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetExtensionSchemasIDReader{formats: a.formats},
+		Reader:             &GetExtensionSchemaReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,7 +51,38 @@ func (a *Client) GetExtensionSchemasID(params *GetExtensionSchemasIDParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetExtensionSchemasIDOK), nil
+	return result.(*GetExtensionSchemaOK), nil
+
+}
+
+/*
+ListExtensionSchemas lists extension schemas
+
+List all extension schemas.
+*/
+func (a *Client) ListExtensionSchemas(params *ListExtensionSchemasParams, authInfo runtime.ClientAuthInfoWriter) (*ListExtensionSchemasOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListExtensionSchemasParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listExtensionSchemas",
+		Method:             "GET",
+		PathPattern:        "/extension_schemas",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListExtensionSchemasReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListExtensionSchemasOK), nil
 
 }
 

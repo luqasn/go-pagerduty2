@@ -25,118 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteExtensionsID deletes an extension
-
-Delete an existing extension. Once the extension is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this extension.
-*/
-func (a *Client) DeleteExtensionsID(params *DeleteExtensionsIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteExtensionsIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteExtensionsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteExtensionsID",
-		Method:             "DELETE",
-		PathPattern:        "/extensions/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteExtensionsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteExtensionsIDNoContent), nil
-
-}
-
-/*
-GetExtensions lists extensions
-
-List existing extensions.
-*/
-func (a *Client) GetExtensions(params *GetExtensionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExtensionsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetExtensions",
-		Method:             "GET",
-		PathPattern:        "/extensions",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExtensionsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetExtensionsOK), nil
-
-}
-
-/*
-GetExtensionsID gets an extension
-
-Get details about an existing extension.
-*/
-func (a *Client) GetExtensionsID(params *GetExtensionsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionsIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExtensionsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetExtensionsID",
-		Method:             "GET",
-		PathPattern:        "/extensions/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExtensionsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetExtensionsIDOK), nil
-
-}
-
-/*
-PostExtensions creates an extension
+CreateExtension creates an extension
 
 Create a new extension.
 */
-func (a *Client) PostExtensions(params *PostExtensionsParams, authInfo runtime.ClientAuthInfoWriter) (*PostExtensionsCreated, error) {
+func (a *Client) CreateExtension(params *CreateExtensionParams, authInfo runtime.ClientAuthInfoWriter) (*CreateExtensionCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostExtensionsParams()
+		params = NewCreateExtensionParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostExtensions",
+		ID:                 "createExtension",
 		Method:             "POST",
 		PathPattern:        "/extensions",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostExtensionsReader{formats: a.formats},
+		Reader:             &CreateExtensionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,30 +51,123 @@ func (a *Client) PostExtensions(params *PostExtensionsParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostExtensionsCreated), nil
+	return result.(*CreateExtensionCreated), nil
 
 }
 
 /*
-PutExtensionsID updates an extension
+DeleteExtension deletes an extension
 
-Update an existing extension.
+Delete an existing extension. Once the extension is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this extension.
 */
-func (a *Client) PutExtensionsID(params *PutExtensionsIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutExtensionsIDOK, error) {
+func (a *Client) DeleteExtension(params *DeleteExtensionParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteExtensionNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutExtensionsIDParams()
+		params = NewDeleteExtensionParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutExtensionsID",
+		ID:                 "deleteExtension",
+		Method:             "DELETE",
+		PathPattern:        "/extensions/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteExtensionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteExtensionNoContent), nil
+
+}
+
+/*
+GetExtension gets an extension
+
+Get details about an existing extension.
+*/
+func (a *Client) GetExtension(params *GetExtensionParams, authInfo runtime.ClientAuthInfoWriter) (*GetExtensionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetExtensionParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getExtension",
+		Method:             "GET",
+		PathPattern:        "/extensions/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetExtensionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetExtensionOK), nil
+
+}
+
+/*
+ListExtensions lists extensions
+
+List existing extensions.
+*/
+func (a *Client) ListExtensions(params *ListExtensionsParams, authInfo runtime.ClientAuthInfoWriter) (*ListExtensionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListExtensionsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listExtensions",
+		Method:             "GET",
+		PathPattern:        "/extensions",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListExtensionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListExtensionsOK), nil
+
+}
+
+/*
+UpdateExtenstion updates an extension
+
+Update an existing extension.
+*/
+func (a *Client) UpdateExtenstion(params *UpdateExtenstionParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateExtenstionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateExtenstionParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateExtenstion",
 		Method:             "PUT",
 		PathPattern:        "/extensions/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutExtensionsIDReader{formats: a.formats},
+		Reader:             &UpdateExtenstionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -175,7 +175,7 @@ func (a *Client) PutExtensionsID(params *PutExtensionsIDParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutExtensionsIDOK), nil
+	return result.(*UpdateExtenstionOK), nil
 
 }
 

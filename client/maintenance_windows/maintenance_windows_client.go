@@ -25,118 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteMaintenanceWindowsID deletes or end a maintenance window
-
-Delete an existing maintenance window if it's in the future, or end it if it's currently on-going. If the maintenance window has already ended it cannot be deleted.
-*/
-func (a *Client) DeleteMaintenanceWindowsID(params *DeleteMaintenanceWindowsIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteMaintenanceWindowsIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteMaintenanceWindowsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteMaintenanceWindowsID",
-		Method:             "DELETE",
-		PathPattern:        "/maintenance_windows/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteMaintenanceWindowsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteMaintenanceWindowsIDNoContent), nil
-
-}
-
-/*
-GetMaintenanceWindows lists maintenance windows
-
-List existing maintenance windows, optionally filtered by service and/or team, or whether they are from the past, present or future.
-*/
-func (a *Client) GetMaintenanceWindows(params *GetMaintenanceWindowsParams, authInfo runtime.ClientAuthInfoWriter) (*GetMaintenanceWindowsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetMaintenanceWindowsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetMaintenanceWindows",
-		Method:             "GET",
-		PathPattern:        "/maintenance_windows",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetMaintenanceWindowsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetMaintenanceWindowsOK), nil
-
-}
-
-/*
-GetMaintenanceWindowsID gets a maintenance window
-
-Get an existing maintenance window.
-*/
-func (a *Client) GetMaintenanceWindowsID(params *GetMaintenanceWindowsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetMaintenanceWindowsIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetMaintenanceWindowsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetMaintenanceWindowsID",
-		Method:             "GET",
-		PathPattern:        "/maintenance_windows/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetMaintenanceWindowsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetMaintenanceWindowsIDOK), nil
-
-}
-
-/*
-PostMaintenanceWindows creates a maintenance window
+CreateMaintenanceWindow creates a maintenance window
 
 Create a new maintenance window for the specified services. No new incidents will be created for a service that is in maintenance.
 */
-func (a *Client) PostMaintenanceWindows(params *PostMaintenanceWindowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostMaintenanceWindowsCreated, error) {
+func (a *Client) CreateMaintenanceWindow(params *CreateMaintenanceWindowParams, authInfo runtime.ClientAuthInfoWriter) (*CreateMaintenanceWindowCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostMaintenanceWindowsParams()
+		params = NewCreateMaintenanceWindowParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostMaintenanceWindows",
+		ID:                 "createMaintenanceWindow",
 		Method:             "POST",
 		PathPattern:        "/maintenance_windows",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostMaintenanceWindowsReader{formats: a.formats},
+		Reader:             &CreateMaintenanceWindowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,30 +51,123 @@ func (a *Client) PostMaintenanceWindows(params *PostMaintenanceWindowsParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostMaintenanceWindowsCreated), nil
+	return result.(*CreateMaintenanceWindowCreated), nil
 
 }
 
 /*
-PutMaintenanceWindowsID updates a maintenance window
+DeleteMaintenanceWindow deletes or end a maintenance window
 
-Update an existing maintenance window.
+Delete an existing maintenance window if it's in the future, or end it if it's currently on-going. If the maintenance window has already ended it cannot be deleted.
 */
-func (a *Client) PutMaintenanceWindowsID(params *PutMaintenanceWindowsIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutMaintenanceWindowsIDOK, error) {
+func (a *Client) DeleteMaintenanceWindow(params *DeleteMaintenanceWindowParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteMaintenanceWindowNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutMaintenanceWindowsIDParams()
+		params = NewDeleteMaintenanceWindowParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutMaintenanceWindowsID",
+		ID:                 "deleteMaintenanceWindow",
+		Method:             "DELETE",
+		PathPattern:        "/maintenance_windows/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteMaintenanceWindowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteMaintenanceWindowNoContent), nil
+
+}
+
+/*
+GetMaintenanceWindow gets a maintenance window
+
+Get an existing maintenance window.
+*/
+func (a *Client) GetMaintenanceWindow(params *GetMaintenanceWindowParams, authInfo runtime.ClientAuthInfoWriter) (*GetMaintenanceWindowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMaintenanceWindowParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getMaintenanceWindow",
+		Method:             "GET",
+		PathPattern:        "/maintenance_windows/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetMaintenanceWindowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetMaintenanceWindowOK), nil
+
+}
+
+/*
+ListMaintenanceWindows lists maintenance windows
+
+List existing maintenance windows, optionally filtered by service and/or team, or whether they are from the past, present or future.
+*/
+func (a *Client) ListMaintenanceWindows(params *ListMaintenanceWindowsParams, authInfo runtime.ClientAuthInfoWriter) (*ListMaintenanceWindowsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListMaintenanceWindowsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listMaintenanceWindows",
+		Method:             "GET",
+		PathPattern:        "/maintenance_windows",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListMaintenanceWindowsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListMaintenanceWindowsOK), nil
+
+}
+
+/*
+UpdateMaintenanceWindow updates a maintenance window
+
+Update an existing maintenance window.
+*/
+func (a *Client) UpdateMaintenanceWindow(params *UpdateMaintenanceWindowParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateMaintenanceWindowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateMaintenanceWindowParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateMaintenanceWindow",
 		Method:             "PUT",
 		PathPattern:        "/maintenance_windows/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutMaintenanceWindowsIDReader{formats: a.formats},
+		Reader:             &UpdateMaintenanceWindowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -175,7 +175,7 @@ func (a *Client) PutMaintenanceWindowsID(params *PutMaintenanceWindowsIDParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutMaintenanceWindowsIDOK), nil
+	return result.(*UpdateMaintenanceWindowOK), nil
 
 }
 

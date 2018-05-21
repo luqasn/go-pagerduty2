@@ -25,56 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteTeamsID deletes a team
+AddEscalationPolicy adds an escalation policy to a team
 
-Remove an existing team.
+Add an escalation policy to a team.
 */
-func (a *Client) DeleteTeamsID(params *DeleteTeamsIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTeamsIDNoContent, error) {
+func (a *Client) AddEscalationPolicy(params *AddEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*AddEscalationPolicyNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTeamsIDParams()
+		params = NewAddEscalationPolicyParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteTeamsID",
-		Method:             "DELETE",
-		PathPattern:        "/teams/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteTeamsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteTeamsIDNoContent), nil
-
-}
-
-/*
-DeleteTeamsIDEscalationPoliciesEscalationPolicyID removes an escalation policy from a team
-
-Remove an escalation policy from a team.
-*/
-func (a *Client) DeleteTeamsIDEscalationPoliciesEscalationPolicyID(params *DeleteTeamsIDEscalationPoliciesEscalationPolicyIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTeamsIDEscalationPoliciesEscalationPolicyIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteTeamsIDEscalationPoliciesEscalationPolicyIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteTeamsIDEscalationPoliciesEscalationPolicyID",
-		Method:             "DELETE",
+		ID:                 "addEscalationPolicy",
+		Method:             "PUT",
 		PathPattern:        "/teams/{id}/escalation_policies/{escalation_policy_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteTeamsIDEscalationPoliciesEscalationPolicyIDReader{formats: a.formats},
+		Reader:             &AddEscalationPolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,30 +51,30 @@ func (a *Client) DeleteTeamsIDEscalationPoliciesEscalationPolicyID(params *Delet
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteTeamsIDEscalationPoliciesEscalationPolicyIDNoContent), nil
+	return result.(*AddEscalationPolicyNoContent), nil
 
 }
 
 /*
-DeleteTeamsIDUsersUserID removes a user from a team
+AddUser adds a user to a team
 
-Remove a user from a team.
+Add a user to a team. Attempting to add a user with the `read_only_user` role will return a 400 error.
 */
-func (a *Client) DeleteTeamsIDUsersUserID(params *DeleteTeamsIDUsersUserIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTeamsIDUsersUserIDNoContent, error) {
+func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoWriter) (*AddUserNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTeamsIDUsersUserIDParams()
+		params = NewAddUserParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteTeamsIDUsersUserID",
-		Method:             "DELETE",
+		ID:                 "addUser",
+		Method:             "PUT",
 		PathPattern:        "/teams/{id}/users/{user_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteTeamsIDUsersUserIDReader{formats: a.formats},
+		Reader:             &AddUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -113,92 +82,30 @@ func (a *Client) DeleteTeamsIDUsersUserID(params *DeleteTeamsIDUsersUserIDParams
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteTeamsIDUsersUserIDNoContent), nil
+	return result.(*AddUserNoContent), nil
 
 }
 
 /*
-GetTeams lists teams
-
-List teams of your PagerDuty account, optionally filtered by a search query.
-*/
-func (a *Client) GetTeams(params *GetTeamsParams, authInfo runtime.ClientAuthInfoWriter) (*GetTeamsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetTeamsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTeams",
-		Method:             "GET",
-		PathPattern:        "/teams",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetTeamsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTeamsOK), nil
-
-}
-
-/*
-GetTeamsID gets a team
-
-Get details about an existing team.
-*/
-func (a *Client) GetTeamsID(params *GetTeamsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetTeamsIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetTeamsIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTeamsID",
-		Method:             "GET",
-		PathPattern:        "/teams/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetTeamsIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTeamsIDOK), nil
-
-}
-
-/*
-PostTeams creates a team
+CreateTeam creates a team
 
 Create a new team.
 */
-func (a *Client) PostTeams(params *PostTeamsParams, authInfo runtime.ClientAuthInfoWriter) (*PostTeamsCreated, error) {
+func (a *Client) CreateTeam(params *CreateTeamParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTeamCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostTeamsParams()
+		params = NewCreateTeamParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostTeams",
+		ID:                 "createTeam",
 		Method:             "POST",
 		PathPattern:        "/teams",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostTeamsReader{formats: a.formats},
+		Reader:             &CreateTeamReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,30 +113,185 @@ func (a *Client) PostTeams(params *PostTeamsParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostTeamsCreated), nil
+	return result.(*CreateTeamCreated), nil
 
 }
 
 /*
-PutTeamsID updates a team
+DeleteTeam deletes a team
 
-Update an existing team.
+Remove an existing team.
 */
-func (a *Client) PutTeamsID(params *PutTeamsIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutTeamsIDOK, error) {
+func (a *Client) DeleteTeam(params *DeleteTeamParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTeamNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutTeamsIDParams()
+		params = NewDeleteTeamParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutTeamsID",
+		ID:                 "deleteTeam",
+		Method:             "DELETE",
+		PathPattern:        "/teams/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteTeamReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteTeamNoContent), nil
+
+}
+
+/*
+GetTeam gets a team
+
+Get details about an existing team.
+*/
+func (a *Client) GetTeam(params *GetTeamParams, authInfo runtime.ClientAuthInfoWriter) (*GetTeamOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTeamParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getTeam",
+		Method:             "GET",
+		PathPattern:        "/teams/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetTeamReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTeamOK), nil
+
+}
+
+/*
+ListTeams lists teams
+
+List teams of your PagerDuty account, optionally filtered by a search query.
+*/
+func (a *Client) ListTeams(params *ListTeamsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTeamsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListTeamsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listTeams",
+		Method:             "GET",
+		PathPattern:        "/teams",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListTeamsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListTeamsOK), nil
+
+}
+
+/*
+RemoveEscalationPolicy removes an escalation policy from a team
+
+Remove an escalation policy from a team.
+*/
+func (a *Client) RemoveEscalationPolicy(params *RemoveEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*RemoveEscalationPolicyNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRemoveEscalationPolicyParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "removeEscalationPolicy",
+		Method:             "DELETE",
+		PathPattern:        "/teams/{id}/escalation_policies/{escalation_policy_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &RemoveEscalationPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*RemoveEscalationPolicyNoContent), nil
+
+}
+
+/*
+RemoveUser removes a user from a team
+
+Remove a user from a team.
+*/
+func (a *Client) RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAuthInfoWriter) (*RemoveUserNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRemoveUserParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "removeUser",
+		Method:             "DELETE",
+		PathPattern:        "/teams/{id}/users/{user_id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &RemoveUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*RemoveUserNoContent), nil
+
+}
+
+/*
+UpdateTeam updates a team
+
+Update an existing team.
+*/
+func (a *Client) UpdateTeam(params *UpdateTeamParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTeamOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateTeamParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateTeam",
 		Method:             "PUT",
 		PathPattern:        "/teams/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutTeamsIDReader{formats: a.formats},
+		Reader:             &UpdateTeamReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -237,69 +299,7 @@ func (a *Client) PutTeamsID(params *PutTeamsIDParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutTeamsIDOK), nil
-
-}
-
-/*
-PutTeamsIDEscalationPoliciesEscalationPolicyID adds an escalation policy to a team
-
-Add an escalation policy to a team.
-*/
-func (a *Client) PutTeamsIDEscalationPoliciesEscalationPolicyID(params *PutTeamsIDEscalationPoliciesEscalationPolicyIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutTeamsIDEscalationPoliciesEscalationPolicyIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPutTeamsIDEscalationPoliciesEscalationPolicyIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutTeamsIDEscalationPoliciesEscalationPolicyID",
-		Method:             "PUT",
-		PathPattern:        "/teams/{id}/escalation_policies/{escalation_policy_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PutTeamsIDEscalationPoliciesEscalationPolicyIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PutTeamsIDEscalationPoliciesEscalationPolicyIDNoContent), nil
-
-}
-
-/*
-PutTeamsIDUsersUserID adds a user to a team
-
-Add a user to a team. Attempting to add a user with the `read_only_user` role will return a 400 error.
-*/
-func (a *Client) PutTeamsIDUsersUserID(params *PutTeamsIDUsersUserIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutTeamsIDUsersUserIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPutTeamsIDUsersUserIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutTeamsIDUsersUserID",
-		Method:             "PUT",
-		PathPattern:        "/teams/{id}/users/{user_id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PutTeamsIDUsersUserIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PutTeamsIDUsersUserIDNoContent), nil
+	return result.(*UpdateTeamOK), nil
 
 }
 

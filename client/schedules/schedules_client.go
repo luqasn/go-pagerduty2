@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteSchedulesID deletes a schedule
+CreateOverride creates an override
 
-Delete an on-call schedule.
+Create an override for a specific user covering the specified time range. If you create an override on top of an existing one, the last created override will have priority.
 */
-func (a *Client) DeleteSchedulesID(params *DeleteSchedulesIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSchedulesIDNoContent, error) {
+func (a *Client) CreateOverride(params *CreateOverrideParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOverrideCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSchedulesIDParams()
+		params = NewCreateOverrideParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteSchedulesID",
-		Method:             "DELETE",
-		PathPattern:        "/schedules/{id}",
+		ID:                 "createOverride",
+		Method:             "POST",
+		PathPattern:        "/schedules/{id}/overrides",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteSchedulesIDReader{formats: a.formats},
+		Reader:             &CreateOverrideReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,30 +51,61 @@ func (a *Client) DeleteSchedulesID(params *DeleteSchedulesIDParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteSchedulesIDNoContent), nil
+	return result.(*CreateOverrideCreated), nil
 
 }
 
 /*
-DeleteSchedulesIDOverridesOverrideID deletes an override
+CreateSchedule creates a schedule
 
-Remove an override. You cannot remove a past override. If the override start time is before the current time, but the end time is after the current time, the override will be truncated to the current time. If the override is truncated, the status code will be 200 OK, as opposed to a 204 No Content for a successful delete.
+Create a new on-call schedule.
 */
-func (a *Client) DeleteSchedulesIDOverridesOverrideID(params *DeleteSchedulesIDOverridesOverrideIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteSchedulesIDOverridesOverrideIDOK, *DeleteSchedulesIDOverridesOverrideIDNoContent, error) {
+func (a *Client) CreateSchedule(params *CreateScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*CreateScheduleCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSchedulesIDOverridesOverrideIDParams()
+		params = NewCreateScheduleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteSchedulesIDOverridesOverrideID",
+		ID:                 "createSchedule",
+		Method:             "POST",
+		PathPattern:        "/schedules",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateScheduleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreateScheduleCreated), nil
+
+}
+
+/*
+DeleteOverride deletes an override
+
+Remove an override. You cannot remove a past override. If the override start time is before the current time, but the end time is after the current time, the override will be truncated to the current time. If the override is truncated, the status code will be 200 OK, as opposed to a 204 No Content for a successful delete.
+*/
+func (a *Client) DeleteOverride(params *DeleteOverrideParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteOverrideOK, *DeleteOverrideNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteOverrideParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteOverride",
 		Method:             "DELETE",
 		PathPattern:        "/schedules/{id}/overrides/{override_id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteSchedulesIDOverridesOverrideIDReader{formats: a.formats},
+		Reader:             &DeleteOverrideReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -83,9 +114,9 @@ func (a *Client) DeleteSchedulesIDOverridesOverrideID(params *DeleteSchedulesIDO
 		return nil, nil, err
 	}
 	switch value := result.(type) {
-	case *DeleteSchedulesIDOverridesOverrideIDOK:
+	case *DeleteOverrideOK:
 		return value, nil, nil
-	case *DeleteSchedulesIDOverridesOverrideIDNoContent:
+	case *DeleteOverrideNoContent:
 		return nil, value, nil
 	}
 	return nil, nil, nil
@@ -93,25 +124,25 @@ func (a *Client) DeleteSchedulesIDOverridesOverrideID(params *DeleteSchedulesIDO
 }
 
 /*
-GetSchedules lists schedules
+DeleteSchedule deletes a schedule
 
-List the on-call schedules.
+Delete an on-call schedule.
 */
-func (a *Client) GetSchedules(params *GetSchedulesParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchedulesOK, error) {
+func (a *Client) DeleteSchedule(params *DeleteScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteScheduleNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSchedulesParams()
+		params = NewDeleteScheduleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSchedules",
-		Method:             "GET",
-		PathPattern:        "/schedules",
+		ID:                 "deleteSchedule",
+		Method:             "DELETE",
+		PathPattern:        "/schedules/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetSchedulesReader{formats: a.formats},
+		Reader:             &DeleteScheduleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -119,30 +150,30 @@ func (a *Client) GetSchedules(params *GetSchedulesParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSchedulesOK), nil
+	return result.(*DeleteScheduleNoContent), nil
 
 }
 
 /*
-GetSchedulesID gets a schedule
+GetSchedule gets a schedule
 
 Show detailed information about a schedule, including entries for each layer and sub-schedule.
 */
-func (a *Client) GetSchedulesID(params *GetSchedulesIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchedulesIDOK, error) {
+func (a *Client) GetSchedule(params *GetScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*GetScheduleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSchedulesIDParams()
+		params = NewGetScheduleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSchedulesID",
+		ID:                 "getSchedule",
 		Method:             "GET",
 		PathPattern:        "/schedules/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetSchedulesIDReader{formats: a.formats},
+		Reader:             &GetScheduleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -150,61 +181,30 @@ func (a *Client) GetSchedulesID(params *GetSchedulesIDParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSchedulesIDOK), nil
+	return result.(*GetScheduleOK), nil
 
 }
 
 /*
-GetSchedulesIDOverrides lists overrides
-
-List overrides for a given time range.
-*/
-func (a *Client) GetSchedulesIDOverrides(params *GetSchedulesIDOverridesParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchedulesIDOverridesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetSchedulesIDOverridesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSchedulesIDOverrides",
-		Method:             "GET",
-		PathPattern:        "/schedules/{id}/overrides",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetSchedulesIDOverridesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetSchedulesIDOverridesOK), nil
-
-}
-
-/*
-GetSchedulesIDUsers lists users on call
+ListOnCallsForSchedule lists users on call
 
 List all of the users on call in a given schedule for a given time range.
 */
-func (a *Client) GetSchedulesIDUsers(params *GetSchedulesIDUsersParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchedulesIDUsersOK, error) {
+func (a *Client) ListOnCallsForSchedule(params *ListOnCallsForScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*ListOnCallsForScheduleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSchedulesIDUsersParams()
+		params = NewListOnCallsForScheduleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSchedulesIDUsers",
+		ID:                 "listOnCallsForSchedule",
 		Method:             "GET",
 		PathPattern:        "/schedules/{id}/users",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetSchedulesIDUsersReader{formats: a.formats},
+		Reader:             &ListOnCallsForScheduleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -212,61 +212,30 @@ func (a *Client) GetSchedulesIDUsers(params *GetSchedulesIDUsersParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSchedulesIDUsersOK), nil
+	return result.(*ListOnCallsForScheduleOK), nil
 
 }
 
 /*
-PostSchedules creates a schedule
+ListOverrides lists overrides
 
-Create a new on-call schedule.
+List overrides for a given time range.
 */
-func (a *Client) PostSchedules(params *PostSchedulesParams, authInfo runtime.ClientAuthInfoWriter) (*PostSchedulesCreated, error) {
+func (a *Client) ListOverrides(params *ListOverridesParams, authInfo runtime.ClientAuthInfoWriter) (*ListOverridesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostSchedulesParams()
+		params = NewListOverridesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostSchedules",
-		Method:             "POST",
-		PathPattern:        "/schedules",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostSchedulesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostSchedulesCreated), nil
-
-}
-
-/*
-PostSchedulesIDOverrides creates an override
-
-Create an override for a specific user covering the specified time range. If you create an override on top of an existing one, the last created override will have priority.
-*/
-func (a *Client) PostSchedulesIDOverrides(params *PostSchedulesIDOverridesParams, authInfo runtime.ClientAuthInfoWriter) (*PostSchedulesIDOverridesCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostSchedulesIDOverridesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostSchedulesIDOverrides",
-		Method:             "POST",
+		ID:                 "listOverrides",
+		Method:             "GET",
 		PathPattern:        "/schedules/{id}/overrides",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostSchedulesIDOverridesReader{formats: a.formats},
+		Reader:             &ListOverridesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -274,30 +243,61 @@ func (a *Client) PostSchedulesIDOverrides(params *PostSchedulesIDOverridesParams
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostSchedulesIDOverridesCreated), nil
+	return result.(*ListOverridesOK), nil
 
 }
 
 /*
-PostSchedulesPreview previews a schedule
+ListSchedules lists schedules
 
-Preview what an on-call schedule would look like without saving it.
+List the on-call schedules.
 */
-func (a *Client) PostSchedulesPreview(params *PostSchedulesPreviewParams, authInfo runtime.ClientAuthInfoWriter) (*PostSchedulesPreviewOK, error) {
+func (a *Client) ListSchedules(params *ListSchedulesParams, authInfo runtime.ClientAuthInfoWriter) (*ListSchedulesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostSchedulesPreviewParams()
+		params = NewListSchedulesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostSchedulesPreview",
+		ID:                 "listSchedules",
+		Method:             "GET",
+		PathPattern:        "/schedules",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListSchedulesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListSchedulesOK), nil
+
+}
+
+/*
+PreviewSchedule previews a schedule
+
+Preview what an on-call schedule would look like without saving it.
+*/
+func (a *Client) PreviewSchedule(params *PreviewScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*PreviewScheduleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPreviewScheduleParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "previewSchedule",
 		Method:             "POST",
 		PathPattern:        "/schedules/preview",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostSchedulesPreviewReader{formats: a.formats},
+		Reader:             &PreviewScheduleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -305,30 +305,30 @@ func (a *Client) PostSchedulesPreview(params *PostSchedulesPreviewParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostSchedulesPreviewOK), nil
+	return result.(*PreviewScheduleOK), nil
 
 }
 
 /*
-PutSchedulesID updates a schedule
+UpdateSchedule updates a schedule
 
 Update an existing on-call schedule.
 */
-func (a *Client) PutSchedulesID(params *PutSchedulesIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutSchedulesIDOK, error) {
+func (a *Client) UpdateSchedule(params *UpdateScheduleParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateScheduleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutSchedulesIDParams()
+		params = NewUpdateScheduleParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutSchedulesID",
+		ID:                 "updateSchedule",
 		Method:             "PUT",
 		PathPattern:        "/schedules/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutSchedulesIDReader{formats: a.formats},
+		Reader:             &UpdateScheduleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -336,7 +336,7 @@ func (a *Client) PutSchedulesID(params *PutSchedulesIDParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutSchedulesIDOK), nil
+	return result.(*UpdateScheduleOK), nil
 
 }
 

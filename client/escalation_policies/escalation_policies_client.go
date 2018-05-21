@@ -25,118 +25,25 @@ type Client struct {
 }
 
 /*
-DeleteEscalationPoliciesID deletes an escalation policy
-
-Deletes an existing escalation policy and rules. The escalation policy must not be in use by any services.
-*/
-func (a *Client) DeleteEscalationPoliciesID(params *DeleteEscalationPoliciesIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteEscalationPoliciesIDNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteEscalationPoliciesIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteEscalationPoliciesID",
-		Method:             "DELETE",
-		PathPattern:        "/escalation_policies/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteEscalationPoliciesIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteEscalationPoliciesIDNoContent), nil
-
-}
-
-/*
-GetEscalationPolicies lists escalation policies
-
-List all of the existing escalation policies.
-*/
-func (a *Client) GetEscalationPolicies(params *GetEscalationPoliciesParams, authInfo runtime.ClientAuthInfoWriter) (*GetEscalationPoliciesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetEscalationPoliciesParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetEscalationPolicies",
-		Method:             "GET",
-		PathPattern:        "/escalation_policies",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetEscalationPoliciesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetEscalationPoliciesOK), nil
-
-}
-
-/*
-GetEscalationPoliciesID gets an escalation policy
-
-Get information about an existing escalation policy and its rules.
-*/
-func (a *Client) GetEscalationPoliciesID(params *GetEscalationPoliciesIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetEscalationPoliciesIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetEscalationPoliciesIDParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetEscalationPoliciesID",
-		Method:             "GET",
-		PathPattern:        "/escalation_policies/{id}",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetEscalationPoliciesIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetEscalationPoliciesIDOK), nil
-
-}
-
-/*
-PostEscalationPolicies creates an escalation policy
+CreateEscalationPolicy creates an escalation policy
 
 Creates a new escalation policy. There must be at least one existing escalation rule added to create a new escalation policy.
 */
-func (a *Client) PostEscalationPolicies(params *PostEscalationPoliciesParams, authInfo runtime.ClientAuthInfoWriter) (*PostEscalationPoliciesCreated, error) {
+func (a *Client) CreateEscalationPolicy(params *CreateEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*CreateEscalationPolicyCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostEscalationPoliciesParams()
+		params = NewCreateEscalationPolicyParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostEscalationPolicies",
+		ID:                 "createEscalationPolicy",
 		Method:             "POST",
 		PathPattern:        "/escalation_policies",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostEscalationPoliciesReader{formats: a.formats},
+		Reader:             &CreateEscalationPolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,30 +51,123 @@ func (a *Client) PostEscalationPolicies(params *PostEscalationPoliciesParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostEscalationPoliciesCreated), nil
+	return result.(*CreateEscalationPolicyCreated), nil
 
 }
 
 /*
-PutEscalationPoliciesID updates an escalation policy
+DeleteEscalationPolicy deletes an escalation policy
 
-Updates an existing escalation policy and rules.
+Deletes an existing escalation policy and rules. The escalation policy must not be in use by any services.
 */
-func (a *Client) PutEscalationPoliciesID(params *PutEscalationPoliciesIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutEscalationPoliciesIDOK, error) {
+func (a *Client) DeleteEscalationPolicy(params *DeleteEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteEscalationPolicyNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutEscalationPoliciesIDParams()
+		params = NewDeleteEscalationPolicyParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutEscalationPoliciesID",
+		ID:                 "deleteEscalationPolicy",
+		Method:             "DELETE",
+		PathPattern:        "/escalation_policies/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteEscalationPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteEscalationPolicyNoContent), nil
+
+}
+
+/*
+GetEscalationPolicy gets an escalation policy
+
+Get information about an existing escalation policy and its rules.
+*/
+func (a *Client) GetEscalationPolicy(params *GetEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*GetEscalationPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEscalationPolicyParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getEscalationPolicy",
+		Method:             "GET",
+		PathPattern:        "/escalation_policies/{id}",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetEscalationPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetEscalationPolicyOK), nil
+
+}
+
+/*
+ListEscalationPolicies lists escalation policies
+
+List all of the existing escalation policies.
+*/
+func (a *Client) ListEscalationPolicies(params *ListEscalationPoliciesParams, authInfo runtime.ClientAuthInfoWriter) (*ListEscalationPoliciesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListEscalationPoliciesParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listEscalationPolicies",
+		Method:             "GET",
+		PathPattern:        "/escalation_policies",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListEscalationPoliciesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListEscalationPoliciesOK), nil
+
+}
+
+/*
+UpdateEscalationPolicy updates an escalation policy
+
+Updates an existing escalation policy and rules.
+*/
+func (a *Client) UpdateEscalationPolicy(params *UpdateEscalationPolicyParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateEscalationPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateEscalationPolicyParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateEscalationPolicy",
 		Method:             "PUT",
 		PathPattern:        "/escalation_policies/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutEscalationPoliciesIDReader{formats: a.formats},
+		Reader:             &UpdateEscalationPolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -175,7 +175,7 @@ func (a *Client) PutEscalationPoliciesID(params *PutEscalationPoliciesIDParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutEscalationPoliciesIDOK), nil
+	return result.(*UpdateEscalationPolicyOK), nil
 
 }
 

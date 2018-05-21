@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-GetAbilities lists abilities
+ListAbilities lists abilities
 
 List all of your account's abilities, by name.
 */
-func (a *Client) GetAbilities(params *GetAbilitiesParams, authInfo runtime.ClientAuthInfoWriter) (*GetAbilitiesOK, error) {
+func (a *Client) ListAbilities(params *ListAbilitiesParams, authInfo runtime.ClientAuthInfoWriter) (*ListAbilitiesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAbilitiesParams()
+		params = NewListAbilitiesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAbilities",
+		ID:                 "listAbilities",
 		Method:             "GET",
 		PathPattern:        "/abilities",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetAbilitiesReader{formats: a.formats},
+		Reader:             &ListAbilitiesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,30 +51,30 @@ func (a *Client) GetAbilities(params *GetAbilitiesParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetAbilitiesOK), nil
+	return result.(*ListAbilitiesOK), nil
 
 }
 
 /*
-GetAbilitiesID tests an ability
+TestAbility tests an ability
 
 Test whether your account has a given ability.
 */
-func (a *Client) GetAbilitiesID(params *GetAbilitiesIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetAbilitiesIDNoContent, error) {
+func (a *Client) TestAbility(params *TestAbilityParams, authInfo runtime.ClientAuthInfoWriter) (*TestAbilityNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAbilitiesIDParams()
+		params = NewTestAbilityParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAbilitiesID",
+		ID:                 "testAbility",
 		Method:             "GET",
 		PathPattern:        "/abilities/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetAbilitiesIDReader{formats: a.formats},
+		Reader:             &TestAbilityReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,7 +82,7 @@ func (a *Client) GetAbilitiesID(params *GetAbilitiesIDParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetAbilitiesIDNoContent), nil
+	return result.(*TestAbilityNoContent), nil
 
 }
 

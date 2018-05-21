@@ -1,0 +1,692 @@
+diff --git a/swagger.yaml b/swagger.yaml
+index d734a0c..50808df 100644
+--- a/swagger.yaml
++++ b/swagger.yaml
+@@ -455,6 +455,7 @@ paths:
+         - Abilities
+       description: 'List all of your account''s abilities, by name.'
+       summary: List abilities
++      operationId: listAbilities
+       responses:
+         '200':
+           description: An array of ability names.
+@@ -491,6 +492,7 @@ paths:
+         - Abilities
+       description: Test whether your account has a given ability.
+       summary: Test an ability
++      operationId: testAbility
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -513,6 +515,7 @@ paths:
+         - Add-ons
+       description: List all of the add-ons installed on your account.
+       summary: List installed add-ons
++      operationId: listAddons
+       parameters:
+         - $ref: '#/parameters/include_addon'
+         - name: 'service_ids[]'
+@@ -571,6 +574,7 @@ paths:
+         - Add-ons
+       description: Install an add-on for your account.
+       summary: Install an add-on
++      operationId: installAddon
+       parameters:
+         - name: addon
+           in: body
+@@ -617,6 +621,7 @@ paths:
+         - Add-ons
+       description: Get details about an existing add-on.
+       summary: Get an add-on
++      operationId: getAddon
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -675,6 +680,7 @@ paths:
+         - Add-ons
+       description: Update an existing add-on.
+       summary: Update an add-on
++      operationId: updateAddon
+       parameters:
+         - name: addon
+           in: body
+@@ -727,6 +733,7 @@ paths:
+         - Escalation Policies
+       description: List all of the existing escalation policies.
+       summary: List escalation policies
++      operationId: listEscalationPolicies
+       parameters:
+         - name: query
+           in: query
+@@ -817,6 +824,7 @@ paths:
+         Creates a new escalation policy. There must be at least one existing
+         escalation rule added to create a new escalation policy.
+       summary: Create an escalation policy
++      operationId: createEscalationPolicy
+       parameters:
+         - $ref: '#/parameters/optional_from_header'
+         - name: escalation_policy
+@@ -893,6 +901,7 @@ paths:
+         - Escalation Policies
+       description: Get information about an existing escalation policy and its rules.
+       summary: Get an escalation policy
++      operationId: getEscalationPolicy
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/include_escalation_policy'
+@@ -956,6 +965,7 @@ paths:
+         Deletes an existing escalation policy and rules. The escalation policy
+         must not be in use by any services.
+       summary: Delete an escalation policy
++      operationId: deleteEscalationPolicy
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -974,6 +984,7 @@ paths:
+         - Escalation Policies
+       description: Updates an existing escalation policy and rules.
+       summary: Update an escalation policy
++      operationId: updateEscalationPolicy
+       parameters:
+         - name: escalation_policy
+           in: body
+@@ -1054,6 +1065,7 @@ paths:
+         - Extension Schemas
+       description: List all extension schemas.
+       summary: List extension schemas
++      operationId: listExtensionSchemas
+       responses:
+         '200':
+           description: A paginated array of extension schemas.
+@@ -1110,6 +1122,7 @@ paths:
+         - Extension Schemas
+       description: Get details about one specific extension vendor.
+       summary: Get an extension vendor
++      operationId: getExtensionSchema
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -1164,6 +1177,7 @@ paths:
+         - Extensions
+       description: List existing extensions.
+       summary: List extensions
++      operationId: listExtensions
+       parameters:
+         - name: extension_object_id
+           description: The id of the extension object you want to filter by.
+@@ -1241,6 +1255,7 @@ paths:
+         - Extensions
+       description: Create a new extension.
+       summary: Create an extension
++      operationId: createExtension
+       parameters:
+         - name: extension
+           in: body
+@@ -1299,6 +1314,7 @@ paths:
+         - Extensions
+       description: Get details about an existing extension.
+       summary: Get an extension
++      operationId: getExtension
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: 'include[]'
+@@ -1360,6 +1376,7 @@ paths:
+         be accessible from the web UI and new incidents won't be able to be
+         created for this extension.
+       summary: Delete an extension
++      operationId: deleteExtension
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -1376,6 +1393,7 @@ paths:
+         - Extensions
+       description: Update an existing extension.
+       summary: Update an extension
++      operationId: updateExtenstion
+       parameters:
+         - name: extension
+           in: body
+@@ -1435,6 +1453,7 @@ paths:
+         - Incidents
+       description: List existing incidents.
+       summary: List incidents
++      operationId: listIncidents
+       parameters:
+         - $ref: '#/parameters/since'
+         - $ref: '#/parameters/until'
+@@ -1600,6 +1619,7 @@ paths:
+         - Incidents
+       description: 'Acknowledge, resolve, escalate or reassign one or more incidents.'
+       summary: Manage incidents
++      operationId: manageIncidents
+       parameters:
+         - $ref: '#/parameters/from_header'
+         - name: payload
+@@ -1786,6 +1806,7 @@ paths:
+         Create an incident synchronously without a corresponding event from a
+         monitoring service.
+       summary: Create an Incident
++      operationId: createIncident
+       parameters:
+         - $ref: '#/parameters/from_header'
+         - name: incident
+@@ -1952,6 +1973,7 @@ paths:
+         - Priorities
+       description: 'List existing priorities, in order (most to least severe).'
+       summary: List priorities
++      operationId: listPriorities
+       responses:
+         '200':
+           description: A paginated array of priorities.
+@@ -2042,6 +2064,7 @@ paths:
+         - Incidents
+       description: Merge a list of source incidents into this incident.
+       summary: Merge incidents
++      operationId: mergeIncidents
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/from_header'
+@@ -2104,6 +2127,7 @@ paths:
+         Show detailed information about an incident. Accepts either an incident
+         id, or an incident number.
+       summary: Get an incident
++      operationId: getIncident
+       parameters:
+         - name: id
+           in: path
+@@ -2214,6 +2238,7 @@ paths:
+         - Incidents
+       description: 'Acknowledge, resolve, escalate or reassign an incident.'
+       summary: Update an incident
++      operationId: updateIncident
+       parameters:
+         - name: id
+           in: path
+@@ -2381,6 +2406,7 @@ paths:
+         - Incidents
+       description: List alerts for the specified incident.
+       summary: List alerts for an incident
++      operationId: listAlerts
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: 'statuses[]'
+@@ -2498,6 +2524,7 @@ paths:
+         - Incidents
+       description: Resolve multiple alerts or associate them with different incidents.
+       summary: Manage alerts
++      operationId: manageAlerts
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/from_header'
+@@ -2587,6 +2614,7 @@ paths:
+         - Incidents
+       description: Show detailed information about an alert. Accepts an alert id.
+       summary: Get an alert
++      operationId: getAlert
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: alert_id
+@@ -2652,6 +2680,7 @@ paths:
+         - Incidents
+       description: Resolve an alert or associate an alert with a new parent incident.
+       summary: Update an alert
++      operationId: updateAlert
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: alert_id
+@@ -2695,6 +2724,7 @@ paths:
+         - Incidents
+       description: List log entries for the specified incident.
+       summary: List log entries for an incident
++      operationId: listLogEntries
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/time_zone'
+@@ -2767,6 +2797,7 @@ paths:
+         - Incidents
+       description: List existing notes for the specified incident.
+       summary: List notes for an incident
++      operationId: listNotes
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -2808,6 +2839,7 @@ paths:
+         - Incidents
+       description: Create a new note for the specified incident.
+       summary: Create a note on an incident
++      operationId: createNote
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/from_header'
+@@ -2861,6 +2893,7 @@ paths:
+         - Incidents
+       description: Snooze an incident.
+       summary: Snooze an incident
++      operationId: snoozeIncident
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/from_header'
+@@ -2975,6 +3008,7 @@ paths:
+         - Log Entries
+       description: List all of the incident log entries across the entire account.
+       summary: List log entries
++      operationId: listLogEntries
+       parameters:
+         - $ref: '#/parameters/time_zone'
+         - $ref: '#/parameters/since'
+@@ -3050,6 +3084,7 @@ paths:
+         Get details for a specific incident log entry. This method provides
+         additional information you can use to get at raw event data.
+       summary: Get a log entry
++      operationId: getLogEntry
+       parameters:
+         - $ref: '#/parameters/time_zone'
+         - $ref: '#/parameters/id'
+@@ -3117,6 +3152,7 @@ paths:
+         List existing maintenance windows, optionally filtered by service and/or
+         team, or whether they are from the past, present or future.
+       summary: List maintenance windows
++      operationId: listMaintenanceWindows
+       parameters:
+         - $ref: '#/parameters/team_ids'
+         - $ref: '#/parameters/services'
+@@ -3201,6 +3237,7 @@ paths:
+         Create a new maintenance window for the specified services. No new
+         incidents will be created for a service that is in maintenance.
+       summary: Create a maintenance window
++      operationId: createMaintenanceWindow
+       parameters:
+         - $ref: '#/parameters/from_header'
+         - name: maintenance_window
+@@ -3269,6 +3306,7 @@ paths:
+         - Maintenance Windows
+       description: Get an existing maintenance window.
+       summary: Get a maintenance window
++      operationId: getMaintenanceWindow
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/include_maintenance_window'
+@@ -3329,6 +3367,7 @@ paths:
+         if it's currently on-going. If the maintenance window has already ended
+         it cannot be deleted.
+       summary: Delete or end a maintenance window
++      operationId: deleteMaintenanceWindow
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -3351,6 +3390,7 @@ paths:
+         - Maintenance Windows
+       description: Update an existing maintenance window.
+       summary: Update a maintenance window
++      operationId: updateMaintenanceWindow
+       parameters:
+         - name: maintenance_window
+           in: body
+@@ -3424,6 +3464,7 @@ paths:
+         (sms_notification, email_notification, phone_notification, or
+         push_notification).
+       summary: List notifications
++      operationId: listNotifications
+       parameters:
+         - $ref: '#/parameters/time_zone'
+         - name: since
+@@ -3530,6 +3571,7 @@ paths:
+         - On-Calls
+       description: List the on-call entries during a given time range.
+       summary: List all of the on-calls
++      operationId: listOnCalls
+       parameters:
+         - $ref: '#/parameters/time_zone'
+         - name: 'include[]'
+@@ -3659,6 +3701,7 @@ paths:
+         - Schedules
+       description: List the on-call schedules.
+       summary: List schedules
++      operationId: listSchedules
+       parameters:
+         - name: query
+           in: query
+@@ -3721,6 +3764,7 @@ paths:
+         - Schedules
+       description: Create a new on-call schedule.
+       summary: Create a schedule
++      operationId: createSchedule
+       parameters:
+         - $ref: '#/parameters/schedule_overflow'
+         - name: schedule
+@@ -3813,6 +3857,7 @@ paths:
+         - Schedules
+       description: Preview what an on-call schedule would look like without saving it.
+       summary: Preview a schedule
++      operationId: previewSchedule
+       parameters:
+         - $ref: '#/parameters/since'
+         - $ref: '#/parameters/until'
+@@ -3899,6 +3944,7 @@ paths:
+         Show detailed information about a schedule, including entries for each
+         layer and sub-schedule.
+       summary: Get a schedule
++      operationId: getSchedule
+       parameters:
+         - $ref: '#/parameters/time_zone'
+         - $ref: '#/parameters/since'
+@@ -3996,6 +4042,7 @@ paths:
+         - Schedules
+       description: Delete an on-call schedule.
+       summary: Delete a schedule
++      operationId: deleteSchedule
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -4016,6 +4063,7 @@ paths:
+         - Schedules
+       description: Update an existing on-call schedule.
+       summary: Update a schedule
++      operationId: updateSchedule
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/schedule_overflow'
+@@ -4107,6 +4155,7 @@ paths:
+         - Schedules
+       description: List overrides for a given time range.
+       summary: List overrides
++      operationId: listOverrides
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: since
+@@ -4177,6 +4226,7 @@ paths:
+         range. If you create an override on top of an existing one, the last
+         created override will have priority.
+       summary: Create an override
++      operationId: createOverride
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: override
+@@ -4234,6 +4284,7 @@ paths:
+         override is truncated, the status code will be 200 OK, as opposed to a
+         204 No Content for a successful delete.
+       summary: Delete an override
++      operationId: deleteOverride
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/schedule_override_id'
+@@ -4259,6 +4310,7 @@ paths:
+         List all of the users on call in a given schedule for a given time
+         range.
+       summary: List users on call
++      operationId: listOnCalls
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/since'
+@@ -4378,6 +4430,7 @@ paths:
+         - Services
+       description: List existing services.
+       summary: List services
++      operationId: listServices
+       parameters:
+         - $ref: '#/parameters/team_ids'
+         - $ref: '#/parameters/time_zone'
+@@ -4490,6 +4543,7 @@ paths:
+         - Services
+       description: Create a new service.
+       summary: Create a service
++      operationId: createService
+       parameters:
+         - name: service
+           in: body
+@@ -4586,6 +4640,7 @@ paths:
+         - Services
+       description: Get details about an existing service.
+       summary: Get a service
++      operationId: getService
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: 'include[]'
+@@ -4685,6 +4740,7 @@ paths:
+         accessible from the web UI and new incidents won't be able to be created
+         for this service.
+       summary: Delete a service
++      operationId: deleteService
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -4699,6 +4755,7 @@ paths:
+         - Services
+       description: Update an existing service.
+       summary: Update a service
++      operationId: updateService
+       parameters:
+         - name: service
+           in: body
+@@ -4796,6 +4853,7 @@ paths:
+       tags:
+         - Services
+       summary: Create a new integration
++      operationId: createIntegration
+       description: Create a new integration belonging to a service.
+       parameters:
+         - name: integration
+@@ -4853,6 +4911,7 @@ paths:
+       tags:
+         - Services
+       summary: Update an existing integration
++      operationId: updateIntegration
+       description: Update an integration belonging to a service.
+       parameters:
+         - name: integration
+@@ -4911,6 +4970,7 @@ paths:
+       tags:
+         - Services
+       summary: View an integration
++      operationId: getIntegration
+       description: Get details about an integration belonging to a service.
+       parameters:
+         - $ref: '#/parameters/id'
+@@ -4978,6 +5038,7 @@ paths:
+         - Teams
+       description: Create a new team.
+       summary: Create a team
++      operationId: createTeam
+       parameters:
+         - name: team
+           in: body
+@@ -5026,6 +5087,7 @@ paths:
+         List teams of your PagerDuty account, optionally filtered by a search
+         query.
+       summary: List teams
++      operationId: listTeams
+       parameters:
+         - name: query
+           in: query
+@@ -5078,6 +5140,7 @@ paths:
+         - Teams
+       description: Get details about an existing team.
+       summary: Get a team
++      operationId: getTeam
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -5117,6 +5180,7 @@ paths:
+         - Teams
+       description: Remove an existing team.
+       summary: Delete a team
++      operationId: deleteTeam
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -5135,6 +5199,7 @@ paths:
+         - Teams
+       description: Update an existing team.
+       summary: Update a team
++      operationId: updateTeam
+       parameters:
+         - name: team
+           in: body
+@@ -5184,6 +5249,7 @@ paths:
+         - Teams
+       description: Remove an escalation policy from a team.
+       summary: Remove an escalation policy from a team
++      operationId: removeEscalationPolicy
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/team_escalation_policy_id'
+@@ -5207,6 +5273,7 @@ paths:
+         - Teams
+       description: Add an escalation policy to a team.
+       summary: Add an escalation policy to a team
++      operationId: addEscalationPolicy
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/team_escalation_policy_id'
+@@ -5232,6 +5299,7 @@ paths:
+         - Teams
+       description: Remove a user from a team.
+       summary: Remove a user from a team
++      operationId: removeUser
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/team_user_id'
+@@ -5257,6 +5325,7 @@ paths:
+         Add a user to a team. Attempting to add a user with the `read_only_user`
+         role will return a 400 error.
+       summary: Add a user to a team
++      operationId: addUser
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/team_user_id'
+@@ -5284,6 +5353,7 @@ paths:
+         List users of your PagerDuty account, optionally filtered by a search
+         query.
+       summary: List users
++      operationId: listUsers
+       parameters:
+         - name: query
+           in: query
+@@ -5411,6 +5481,7 @@ paths:
+         Create a new user. Note that you must also supply a `password` property
+         to create a user--it will not be returned by any API.
+       summary: Create a user
++      operationId: createUser
+       parameters:
+         - $ref: '#/parameters/from_header'
+         - name: user
+@@ -5494,6 +5565,7 @@ paths:
+         - Users
+       description: Get details about an existing user.
+       summary: Get a user
++      operationId: getUser
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/include_user'
+@@ -5566,6 +5638,7 @@ paths:
+         - Users
+       description: Remove an existing user.
+       summary: Delete a user
++      operationId: deleteUser
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -5586,6 +5659,7 @@ paths:
+         Update an existing user. Note that you may also supply a `password`
+         property--it will not be returned by any API.
+       summary: Update a user
++      operationId: updateUser
+       parameters:
+         - name: user
+           in: body
+@@ -5679,6 +5753,7 @@ paths:
+         - Users
+       description: List contact methods of your PagerDuty user.
+       summary: List a user's contact methods
++      operationId: listContactMethods
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:
+@@ -5718,6 +5793,7 @@ paths:
+         - Users
+       description: Create a new contact method.
+       summary: Create a user contact method
++      operationId: createContactMethod
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: contact_method
+@@ -5766,6 +5842,7 @@ paths:
+         - Users
+       description: Get details about a user's contact method.
+       summary: Get a user's contact method
++      operationId: getContactMethod
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_contact_method_id'
+@@ -5805,6 +5882,7 @@ paths:
+         - Users
+       description: Remove a user's contact method.
+       summary: Delete a user's contact method
++      operationId: deleteContactMethod
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_contact_method_id'
+@@ -5824,6 +5902,7 @@ paths:
+         - Users
+       description: Update a user's contact method.
+       summary: Update a user's contact method
++      operationId: updateContactMethod
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_contact_method_id'
+@@ -5875,6 +5954,7 @@ paths:
+         - Users
+       description: List notification rules of your PagerDuty user.
+       summary: List a user's notification rules
++      operationId: listNotificationRules
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: 'include[]'
+@@ -5931,6 +6011,7 @@ paths:
+         - Users
+       description: Create a new notification rule.
+       summary: Create a user notification rule
++      operationId: createNotificationRule
+       parameters:
+         - $ref: '#/parameters/id'
+         - name: notification_rule
+@@ -5989,6 +6070,7 @@ paths:
+         - Users
+       description: Get details about a user's notification rule.
+       summary: Get a user's notification rule
++      operationId: getNotificationRule
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_notification_rule_id'
+@@ -6046,6 +6128,7 @@ paths:
+         - Users
+       description: Remove a user's notification rule.
+       summary: Delete a user's notification rule
++      operationId: deleteNotificationRule
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_notification_rule_id'
+@@ -6065,6 +6148,7 @@ paths:
+         - Users
+       description: Update a user's notification rule.
+       summary: Update a user's notification rule
++      operationId: updateNotificationRule
+       parameters:
+         - $ref: '#/parameters/id'
+         - $ref: '#/parameters/user_notification_rule_id'
+@@ -6126,6 +6210,7 @@ paths:
+         - Vendors
+       description: List all vendors.
+       summary: List vendors
++      operationId: listVendors
+       responses:
+         '200':
+           description: A paginated array of vendors.
+@@ -6181,6 +6266,7 @@ paths:
+         - Vendors
+       description: Get details about one specific vendor.
+       summary: Get a vendor
++      operationId: getVendor
+       parameters:
+         - $ref: '#/parameters/id'
+       responses:

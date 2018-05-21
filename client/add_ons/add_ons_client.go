@@ -56,56 +56,25 @@ func (a *Client) DeleteAddonsID(params *DeleteAddonsIDParams, authInfo runtime.C
 }
 
 /*
-GetAddons lists installed add ons
-
-List all of the add-ons installed on your account.
-*/
-func (a *Client) GetAddons(params *GetAddonsParams, authInfo runtime.ClientAuthInfoWriter) (*GetAddonsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAddonsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAddons",
-		Method:             "GET",
-		PathPattern:        "/addons",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetAddonsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetAddonsOK), nil
-
-}
-
-/*
-GetAddonsID gets an add on
+GetAddon gets an add on
 
 Get details about an existing add-on.
 */
-func (a *Client) GetAddonsID(params *GetAddonsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetAddonsIDOK, error) {
+func (a *Client) GetAddon(params *GetAddonParams, authInfo runtime.ClientAuthInfoWriter) (*GetAddonOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAddonsIDParams()
+		params = NewGetAddonParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAddonsID",
+		ID:                 "getAddon",
 		Method:             "GET",
 		PathPattern:        "/addons/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetAddonsIDReader{formats: a.formats},
+		Reader:             &GetAddonReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -113,30 +82,30 @@ func (a *Client) GetAddonsID(params *GetAddonsIDParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetAddonsIDOK), nil
+	return result.(*GetAddonOK), nil
 
 }
 
 /*
-PostAddons installs an add on
+InstallAddon installs an add on
 
 Install an add-on for your account.
 */
-func (a *Client) PostAddons(params *PostAddonsParams, authInfo runtime.ClientAuthInfoWriter) (*PostAddonsCreated, error) {
+func (a *Client) InstallAddon(params *InstallAddonParams, authInfo runtime.ClientAuthInfoWriter) (*InstallAddonCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostAddonsParams()
+		params = NewInstallAddonParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostAddons",
+		ID:                 "installAddon",
 		Method:             "POST",
 		PathPattern:        "/addons",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostAddonsReader{formats: a.formats},
+		Reader:             &InstallAddonReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,30 +113,61 @@ func (a *Client) PostAddons(params *PostAddonsParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostAddonsCreated), nil
+	return result.(*InstallAddonCreated), nil
 
 }
 
 /*
-PutAddonsID updates an add on
+ListAddons lists installed add ons
 
-Update an existing add-on.
+List all of the add-ons installed on your account.
 */
-func (a *Client) PutAddonsID(params *PutAddonsIDParams, authInfo runtime.ClientAuthInfoWriter) (*PutAddonsIDOK, error) {
+func (a *Client) ListAddons(params *ListAddonsParams, authInfo runtime.ClientAuthInfoWriter) (*ListAddonsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutAddonsIDParams()
+		params = NewListAddonsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutAddonsID",
+		ID:                 "listAddons",
+		Method:             "GET",
+		PathPattern:        "/addons",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListAddonsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAddonsOK), nil
+
+}
+
+/*
+UpdateAddon updates an add on
+
+Update an existing add-on.
+*/
+func (a *Client) UpdateAddon(params *UpdateAddonParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateAddonOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAddonParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateAddon",
 		Method:             "PUT",
 		PathPattern:        "/addons/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutAddonsIDReader{formats: a.formats},
+		Reader:             &UpdateAddonReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -175,7 +175,7 @@ func (a *Client) PutAddonsID(params *PutAddonsIDParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutAddonsIDOK), nil
+	return result.(*UpdateAddonOK), nil
 
 }
 

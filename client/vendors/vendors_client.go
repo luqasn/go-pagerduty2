@@ -25,56 +25,25 @@ type Client struct {
 }
 
 /*
-GetVendors lists vendors
-
-List all vendors.
-*/
-func (a *Client) GetVendors(params *GetVendorsParams, authInfo runtime.ClientAuthInfoWriter) (*GetVendorsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetVendorsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetVendors",
-		Method:             "GET",
-		PathPattern:        "/vendors",
-		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetVendorsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetVendorsOK), nil
-
-}
-
-/*
-GetVendorsID gets a vendor
+GetVendor gets a vendor
 
 Get details about one specific vendor.
 */
-func (a *Client) GetVendorsID(params *GetVendorsIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetVendorsIDOK, error) {
+func (a *Client) GetVendor(params *GetVendorParams, authInfo runtime.ClientAuthInfoWriter) (*GetVendorOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVendorsIDParams()
+		params = NewGetVendorParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetVendorsID",
+		ID:                 "getVendor",
 		Method:             "GET",
 		PathPattern:        "/vendors/{id}",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetVendorsIDReader{formats: a.formats},
+		Reader:             &GetVendorReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -82,7 +51,38 @@ func (a *Client) GetVendorsID(params *GetVendorsIDParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetVendorsIDOK), nil
+	return result.(*GetVendorOK), nil
+
+}
+
+/*
+ListVendors lists vendors
+
+List all vendors.
+*/
+func (a *Client) ListVendors(params *ListVendorsParams, authInfo runtime.ClientAuthInfoWriter) (*ListVendorsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListVendorsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listVendors",
+		Method:             "GET",
+		PathPattern:        "/vendors",
+		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListVendorsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListVendorsOK), nil
 
 }
 

@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-GetPriorities lists priorities
+ListPriorities lists priorities
 
 List existing priorities, in order (most to least severe).
 */
-func (a *Client) GetPriorities(params *GetPrioritiesParams, authInfo runtime.ClientAuthInfoWriter) (*GetPrioritiesOK, error) {
+func (a *Client) ListPriorities(params *ListPrioritiesParams, authInfo runtime.ClientAuthInfoWriter) (*ListPrioritiesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPrioritiesParams()
+		params = NewListPrioritiesParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPriorities",
+		ID:                 "listPriorities",
 		Method:             "GET",
 		PathPattern:        "/priorities",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPrioritiesReader{formats: a.formats},
+		Reader:             &ListPrioritiesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,7 +51,7 @@ func (a *Client) GetPriorities(params *GetPrioritiesParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPrioritiesOK), nil
+	return result.(*ListPrioritiesOK), nil
 
 }
 

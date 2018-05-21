@@ -14,4 +14,4 @@ download-spec:
 update-spec: download-spec patch-spec
 
 patch-spec:
-	git apply -v on_call_details.patch
+	git apply -v patches/*

@@ -25,25 +25,25 @@ type Client struct {
 }
 
 /*
-GetOncalls lists all of the on calls
+ListOnCalls lists all of the on calls
 
 List the on-call entries during a given time range.
 */
-func (a *Client) GetOncalls(params *GetOncallsParams, authInfo runtime.ClientAuthInfoWriter) (*GetOncallsOK, error) {
+func (a *Client) ListOnCalls(params *ListOnCallsParams, authInfo runtime.ClientAuthInfoWriter) (*ListOnCallsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetOncallsParams()
+		params = NewListOnCallsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOncalls",
+		ID:                 "listOnCalls",
 		Method:             "GET",
 		PathPattern:        "/oncalls",
 		ProducesMediaTypes: []string{"application/vnd.pagerduty+json;version=2"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetOncallsReader{formats: a.formats},
+		Reader:             &ListOnCallsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -51,7 +51,7 @@ func (a *Client) GetOncalls(params *GetOncallsParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetOncallsOK), nil
+	return result.(*ListOnCallsOK), nil
 
 }
 
